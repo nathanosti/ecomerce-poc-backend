@@ -11,7 +11,7 @@ export class User extends Document {
   email: string;
 
   @Prop()
-  password: string;
+  readonly password: string;
 
   @Prop({ default: false })
   seller: boolean;
