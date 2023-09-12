@@ -13,3 +13,11 @@ export class RegisterUserDTO {
   @IsBoolean()
   seller: boolean;
 }
+
+export class LoginUserDTO {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  password: string;
+}
