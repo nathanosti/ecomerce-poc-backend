@@ -9,4 +9,5 @@ export interface UsersRepository {
 export interface UserServiceImpl {
   createUser(user: RegisterUserDTO): Promise<User>;
   loginUser(userAuthData: LoginUserDTO): Promise<User>;
+  findByPayload(payload: any): Promise<User>;
 }

@@ -45,4 +45,10 @@ export class UsersService implements UserServiceImpl {
       throw new HttpException('Invalid Credentials', HttpStatus.UNAUTHORIZED);
     }
   }
+
+  async findByPayload(payload: any): Promise<User> {
+    const { email } = payload;
+
+    return await this.userRepository.findOne(email);
+  }
 }
