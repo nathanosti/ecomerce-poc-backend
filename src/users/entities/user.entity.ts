@@ -5,31 +5,30 @@ import { Address } from './address.entity';
 
 @Schema()
 export class User extends Document {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true })
   email: string;
 
-  @Prop()
+  @Prop({ required: true })
   password: string;
 
   @Prop({ default: false })
   seller: boolean;
 
-  @Prop({ type: Address })
+  @Prop({ type: Address, required: false })
   address: Address;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
-UserSchema.pre('save', async (next) => {
-  const user = this as User;
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
 
-  if (!user.isModified('password')) return next();
   try {
-    const hashedPass = await bcrypt.hash(user.password, 10);
-    user.password = hashedPass;
+    const hashedPass = await bcrypt.hash(this.password, 10);
+    this.password = hashedPass;
 
     return next();
   } catch (err) {
