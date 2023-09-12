@@ -4,6 +4,6 @@ export interface UsersRepository {
   create(user: User): Promise<User>;
 }
 
-export interface UserService {
+export interface UserServiceImpl {
   createUser(user: User): Promise<User>;
 }
